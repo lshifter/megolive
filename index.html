@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пряма трансляція Усик-Дюбуа 2 | Megogo</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+      background: url('https://img.tsn.ua/cached/215/tsn-671b840e81dae5015bc4c6345e63d1d0/thumbs/1200x630/a5/dd/0fad519da6c848ef03c8d88c2728dda5.jpeg') center/cover no-repeat;
+    }
+    /* Overlay */
+    .overlay {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    /* Hero */
+    .hero {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      height: 100%; text-align: center;
+      padding: 20px;
+    }
+    .logo {
+      width: 120px; margin-bottom: 20px;
+      animation: fadeIn 1s ease-out both;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #FFD700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      animation: fadeInDown 1s ease-out both;
+    }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px);} to { opacity: 1; transform: translateY(0);} }
+    .live {
+      display: inline-block;
+      background: #e60000;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-left: 10px;
+      animation: blink 4s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.5;} }
+    p.subtitle {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.4;
+      color: #FFFAFA;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+    .partner {
+      font-size: 1em;
+      margin-bottom: 30px;
+      color: #FFD700;
+      opacity: 0.9;
+      animation: fadeIn 1s ease-out 1s both;
+    }
+    @keyframes fadeIn { from { opacity: 0;} to { opacity: 1;} }
+    .buttons {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeIn 1s ease-out 1.2s both;
+    }
+    .btn {
+      position: relative;
+      display: inline-flex; align-items: center;
+      gap: 10px; padding: 16px 32px;
+      font-size: 1.1em; font-weight: bold;
+      text-decoration: none; border-radius: 50px;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .btn:hover { transform: scale(1.06); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .btn.ripple-container { overflow: hidden; }
+    .btn-telegram { background: #00bfff; color: #fff; }
+    .btn-casino { background: #ff4500; color: #fff; }
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+    }
+    @keyframes ripple { to { transform: scale(4); opacity: 0;} }
+    @media(max-width:600px) {
+      h1 { font-size: 2em; }
+      p.subtitle { font-size: 1em; }
+      .btn { padding: 12px 24px; font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="hero">
+    <img src="https://www.instalki.pl/wp-content/uploads/program/icons/M/1d2786039dcc545cccf678a1f4fe95c4unnamed.png" alt="Megogo Logo" class="logo">
+    <h1>НЕ ПРОПУСТИ бій Усика-Дюбуа 2<span class="live">🔴 LIVE 19 липня</span></h1>
+    <p class="subtitle">Ексклюзивна пряма трансляція на <span style="color:#FFD700;">Megogo</span><br>Бонус 150 ₴ за перший депозит — став і вигравай!</p>
+    <div class="buttons">
+      <a href="https://t.me/+GHvu4aURmOdkNTYy" class="btn btn-telegram ripple-container" target="_blank">📲 Отримати доступ</a>
+      <a href="https://gamehub.g2afse.com/click?pid=3751&offer_id=822&sub1=video4" class="btn btn-casino ripple-container" target="_blank">💰 Зробити депозит</a>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.ripple-container').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const span = document.createElement('span'); span.className = 'ripple'; btn.appendChild(span);
+        const d = Math.max(btn.clientWidth, btn.clientHeight);
+        span.style.width = span.style.height = d + 'px';
+        const rect = btn.getBoundingClientRect();
+        span.style.left = e.clientX - rect.left - d/2 + 'px';
+        span.style.top = e.clientY - rect.top - d/2 + 'px';
+        setTimeout(() => span.remove(), 600);
+      });
+    });
+  </script>
+</body>
+</html>
