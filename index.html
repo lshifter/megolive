@@ -34,94 +34,559 @@
       animation: fadeIn 1s ease-out both;
     }
     h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-      color: #FFD700;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-      animation: fadeInDown 1s ease-out both;
+      font-size: 3em;<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Гран-при Нидерландов 2025 — F1 | Сегодня</title>
+  <meta name="description" content="Гран-при Нидерландов 2025 — Зандворт. Официально выбранные кандидаты: Lando Norris, Charles Leclerc, Max Verstappen. Ставки, прогнозы и прямая трансляция (доступ после поддержки)." />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-900:#04060b;
+      --bg-800:#071125;
+      --card:#0e1622;
+      --muted:#9aa3b2;
+      --text:#eaf0f8;
+      --accent:#ff6a00;
+      --accent-2:#ff3b7a;
+      --glass:rgba(255,255,255,0.03);
+      --success:#18c37d;
+      --danger:#ff4b4b;
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(2,6,23,0.6);
     }
-    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px);} to { opacity: 1; transform: translateY(0);} }
-    .live {
-      display: inline-block;
-      background: #e60000;
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: bold;
-      margin-left: 10px;
-      animation: blink 4s infinite;
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-900),var(--bg-800));color:var(--text);font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.4}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1120px,94%);margin:0 auto}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.35));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{font-family:Orbitron, sans-serif;font-weight:700;font-size:18px;letter-spacing:.6px}
+    .brand span{color:var(--accent)}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{padding:8px 12px;border-radius:999px;color:var(--text);text-decoration:none;font-weight:500}
+    nav a:hover{background:var(--glass)}
+    .burger{display:none;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--text)}
+
+    /* Hero */
+    .hero{padding:42px 0 26px}
+    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .title{font-family:Orbitron, sans-serif;font-size:clamp(28px,6vw,52px);margin:0 0 10px}
+    .title span{display:inline-block}
+    .meta{color:var(--muted);margin-bottom:14px}
+    .lead{color:var(--muted);max-width:60ch}
+    .cta{display:flex;gap:10px;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);text-decoration:none;color:var(--text);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));font-weight:600}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#07101a;border:none;box-shadow:0 10px 30px rgba(255,106,0,0.12);transition:transform .18s ease}
+    .btn-primary:active{transform:translateY(1px)}
+    .hero-media{position:relative;width:100%;height:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,.6))}
+
+    /* track svg + moving car */
+    .track-wrap{position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,0.03)}
+    svg{width:100%;height:auto;display:block}
+    #trackPath{stroke-linecap:round;stroke-linejoin:round;stroke-width:14;fill:none;stroke:linear-gradient(90deg,#ff6a00,#ff3b7a)}
+    /* We'll style path via stroke attribute in markup */
+    .car{
+      position:absolute;top:42%;left:6%;width:56px;height:28px;border-radius:8px;background:linear-gradient(90deg,#ffd87a,#ff6a00);box-shadow:0 10px 30px rgba(255,106,0,0.15);transform-origin:center;display:flex;align-items:center;justify-content:center;font-weight:700;color:#061016
     }
-    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.5;} }
-    p.subtitle {
-      font-size: 1.3em;
-      margin-bottom: 25px;
-      line-height: 1.4;
-      color: #FFFAFA;
-      animation: fadeInUp 1s ease-out 0.5s both;
+
+    /* Drivers cards */
+    section.drivers{padding:28px 0}
+    .section-title{font-family:Orbitron, sans-serif;margin:0 0 6px;font-size:20px}
+    .section-sub{color:var(--muted);margin-bottom:16px}
+    .cards{display:grid;grid-template-columns:1fr;gap:14px}
+    .card{display:flex;gap:14px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
+    .card-media{width:120px;height:120px;border-radius:10px;flex:0 0 120px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .card-media img{width:100%;height:100%;object-fit:contain}
+    .card-body{flex:1}
+    .card h3{margin:0 0 6px}
+    .team{color:var(--muted);margin:0 0 8px}
+    .meta-text{color:var(--muted);margin-bottom:12px}
+    .support-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#07101a;font-weight:800;text-decoration:none;border:none;cursor:pointer;transition:transform .12s ease}
+    .support-btn:active{transform:scale(.98)}
+    .support-count{margin-left:12px;color:var(--muted);font-size:13px}
+
+    /* Events (bets) */
+    .events{padding:26px 0}
+    .event-card{display:flex;gap:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,0.03)}
+    .event-card img{width:260px;height:150px;object-fit:cover;border-radius:10px}
+    .event-body h4{margin:0 0 6px}
+    .radio{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--glass);cursor:pointer}
+    .event-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .hint{color:var(--muted);margin-top:8px;font-size:13px}
+
+    /* Experts */
+    .experts{padding:26px 0}
+    .expert-list{display:grid;gap:12px}
+    .expert{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .expert img{width:72px;height:72px;object-fit:cover;border-radius:10px}
+    .expert h4{margin:0}
+    .expert .pos{color:var(--muted);font-size:13px;margin:4px 0}
+    .expert blockquote{margin:8px 0 0;padding-left:10px;border-left:3px solid rgba(255,255,255,0.03);color:var(--text);font-style:normal}
+
+    /* Live modal */
+    .live-btn{position:fixed;right:18px;bottom:18px;z-index:120}
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(2,6,23,0.6);backdrop-filter:blur(6px);padding:20px;z-index:200}
+    .modal.active{display:grid}
+    .modal-card{width:min(980px,96vw);background:linear-gradient(180deg,#07101a,#0b1723);border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .modal-body{padding:16px}
+    .teaser{position:relative;border-radius:10px;overflow:hidden}
+    .teaser img{width:100%;height:auto;display:block}
+    .play-overlay{position:absolute;inset:0;display:grid;place-items:center}
+    .play-circle{width:84px;height:84px;border-radius:50%;background:rgba(8,12,20,0.75);display:grid;place-items:center;border:2px solid rgba(255,255,255,0.08)}
+    .play-circle i{font-size:28px;color:white;margin-left:4px}
+    .gate{margin-top:12px;padding:12px;border-radius:10px;border:1px dashed rgba(255,255,255,0.06);color:var(--muted)}
+    .gate strong{color:var(--text)}
+
+    /* Footer */
+    footer{padding:18px 0;border-top:1px solid rgba(255,255,255,0.03);margin-top:36px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .tg{display:inline-block;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#07101a;text-decoration:none;font-weight:700}
+
+    /* Responsive tweaks */
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr;gap:18px}
+      nav{display:none}
+      .burger{display:inline-flex}
+      .cards{grid-template-columns:1fr}
     }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-    .partner {
-      font-size: 1em;
-      margin-bottom: 30px;
-      color: #FFD700;
-      opacity: 0.9;
-      animation: fadeIn 1s ease-out 1s both;
+    @media(min-width:980px){
+      .cards{grid-template-columns:repeat(3, 1fr)}
+      .expert-list{grid-template-columns:repeat(2,1fr)}
     }
-    @keyframes fadeIn { from { opacity: 0;} to { opacity: 1;} }
-    .buttons {
-      display: flex; gap: 20px; flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeIn 1s ease-out 1.2s both;
+
+    /* subtle animated micro interactions */
+    .support-anim{
+      position:relative;
     }
-    .btn {
-      position: relative;
-      display: inline-flex; align-items: center;
-      gap: 10px; padding: 16px 32px;
-      font-size: 1.1em; font-weight: bold;
-      text-decoration: none; border-radius: 50px;
-      transition: transform .3s, box-shadow .3s;
+    .support-anim::after{
+      content:'';
+      position:absolute;
+      right:-6px;top:-6px;width:10px;height:10px;border-radius:50%;background:var(--success);opacity:0;transform:scale(.2);transition:all .28s ease;
     }
-    .btn:hover { transform: scale(1.06); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-    .btn.ripple-container { overflow: hidden; }
-    .btn-telegram { background: #00bfff; color: #fff; }
-    .btn-casino { background: #ff4500; color: #fff; }
-    .ripple {
-      position: absolute; border-radius: 50%;
-      background: rgba(255,255,255,0.6);
-      transform: scale(0);
-      animation: ripple 0.6s linear;
-    }
-    @keyframes ripple { to { transform: scale(4); opacity: 0;} }
-    @media(max-width:600px) {
-      h1 { font-size: 2em; }
-      p.subtitle { font-size: 1em; }
-      .btn { padding: 12px 24px; font-size: 1em; }
-    }
+    .support-anim.active::after{opacity:1;transform:scale(1)}
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="hero">
-    <img src="https://www.instalki.pl/wp-content/uploads/program/icons/M/1d2786039dcc545cccf678a1f4fe95c4unnamed.png" alt="Megogo Logo" class="logo">
-    <h1>НЕ ПРОПУСТИ бій Усика-Дюбуа 2<span class="live">🔴 LIVE 19 липня</span></h1>
-    <p class="subtitle">Ексклюзивна пряма трансляція на <span style="color:#FFD700;">Megogo</span><br>Бонус 150 ₴ за перший депозит — став і вигравай!</p>
-    <div class="buttons">
-      <a href="https://t.me/+GHvu4aURmOdkNTYy" class="btn btn-telegram ripple-container" target="_blank">📲 Отримати доступ</a>
-      <a href="https://gamehub.g2afse.com/click?pid=3751&offer_id=822&sub1=video4" class="btn btn-casino ripple-container" target="_blank">💰 Зробити депозит</a>
+  <header>
+    <div class="wrap header-inner" role="banner">
+      <a class="brand" href="#home" aria-label="F1 Netherlands">F1 <span>Netherlands</span></a>
+      <nav aria-label="Основная навигация">
+        <a href="#drivers">Гонщики</a>
+        <a href="#events">Ставки</a>
+        <a href="#experts">Эксперты</a>
+      </nav>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="main-nav" title="Открыть меню">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero" aria-label="Главная секция">
+      <div class="wrap hero-grid">
+        <div>
+          <h1 class="title"><span>ГРАН-ПРИ</span> <span style="color:var(--accent)">НИДЕРЛАНДОВ</span> <br><small style="font-size:18px;display:block;margin-top:6px">Зандвоорт — Сегодня</small></h1>
+          <p class="meta">29 августа 2025 • Трасса с банкингами, изменчивая погода — высока вероятность сейфти-кара</p>
+          <p class="lead">Три официально выбранных кандидата, события для ставок и экспертные прогнозы. Поддержите одного из пилотов — доступ к эксклюзивной трансляции открывается после поддержки или подтверждённой ставки.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#drivers">Поддержать фаворита</a>
+            <a class="btn" href="#events">Открыть события</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="track-wrap" aria-hidden="true">
+            <!-- SVG трассы — декоративно и с анимацией -->
+            <svg viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Схема трассы">
+              <defs>
+                <linearGradient id="gA" x1="0" x2="1">
+                  <stop offset="0" stop-color="#ffb07a"/>
+                  <stop offset="1" stop-color="#ff3b7a"/>
+                </linearGradient>
+                <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="b"/>
+                </filter>
+              </defs>
+
+              <path id="trackPath" d="M60,230 C120,100 260,60 380,110 C520,160 680,120 740,220 C700,300 600,340 500,320 C380,300 340,360 240,380 C140,400 80,320 60,230 Z"
+                stroke="url(#gA)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="1600" stroke-dashoffset="1600" style="filter:url(#blur);opacity:.95" />
+              <!-- thin inner track -->
+              <path d="M60,230 C120,100 260,60 380,110 C520,160 680,120 740,220 C700,300 600,340 500,320 C380,300 340,360 240,380 C140,400 80,320 60,230 Z"
+                stroke="rgba(255,255,255,0.03)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+            </svg>
+
+            <!-- moving car (pure CSS animation for decor) -->
+            <div class="car" id="decorCar" aria-hidden="true" title="Декоративный автомобиль">🏎️</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRIVERS -->
+    <section id="drivers" class="drivers wrap" aria-label="Кандидаты">
+      <h2 class="section-title">Официально выбранные кандидаты</h2>
+      <p class="section-sub">Три пилота, за которых можно поддержать прямо сейчас</p>
+
+      <div class="cards" id="cards">
+        <!-- CARD: Lando Norris -->
+        <article class="card" data-driver="norris" aria-labelledby="norrisName">
+          <div class="card-media">
+            <img src="https://media.formula1.com/image/upload/v1712849107/content/dam/fom-website/drivers/2024Drivers/norris.png" alt="Lando Norris">
+          </div>
+          <div class="card-body">
+            <h3 id="norrisName">Lando Norris</h3>
+            <p class="team">McLaren</p>
+            <p class="meta-text">Сильная скорость в поворотах средней радиуса и быстрые рестарты. Отличная химия с командой в быстрых настройках.</p>
+            <div style="display:flex;align-items:center;gap:12px">
+              <a class="support-btn" href="https://gamehub.g2afse.com/click?pid=3751&offer_id=822" target="_blank" rel="noopener noreferrer" data-driver="norris" title="Поддержать Lando Norris">
+                Поддержать
+              </a>
+              <span class="support-count" aria-live="polite">Поддержек: <strong data-count="norris">0</strong></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD: Charles Leclerc -->
+        <article class="card" data-driver="leclerc" aria-labelledby="leclercName">
+          <div class="card-media">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.yQWX0hP-dAJ3RtTfEOH9WAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Charles Leclerc">
+          </div>
+          <div class="card-body">
+            <h3 id="leclercName">Charles Leclerc</h3>
+            <p class="team">Ferrari</p>
+            <p class="meta-text">Квалификационный мастер и агрессивный гонщик. Если температура трассы стабильна — будет диктовать темп.</p>
+            <div style="display:flex;align-items:center;gap:12px">
+              <a class="support-btn" href="https://gamehub.g2afse.com/click?pid=3751&offer_id=822" target="_blank" rel="noopener noreferrer" data-driver="leclerc" title="Поддержать Charles Leclerc">
+                Поддержать
+              </a>
+              <span class="support-count" aria-live="polite">Поддержек: <strong data-count="leclerc">0</strong></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD: Max Verstappen -->
+        <article class="card" data-driver="verstappen" aria-labelledby="verstappenName">
+          <div class="card-media">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.emwMfoHyoVkrQQAf82ewAAHaGm?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Max Verstappen">
+          </div>
+          <div class="card-body">
+            <h3 id="verstappenName">Max Verstappen</h3>
+            <p class="team">Red Bull Racing</p>
+            <p class="meta-text">Домашняя трасса, невероятная поддержка трибун и стабильный темп — фаворит вне зависимости от погоды.</p>
+            <div style="display:flex;align-items:center;gap:12px">
+              <a class="support-btn" href="https://gamehub.g2afse.com/click?pid=3751&offer_id=822" target="_blank" rel="noopener noreferrer" data-driver="verstappen" title="Поддержать Max Verstappen">
+                Поддержать
+              </a>
+              <span class="support-count" aria-live="polite">Поддержек: <strong data-count="verstappen">0</strong></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EVENTS / BETS -->
+    <section id="events" class="events wrap" aria-label="События для ставок">
+      <h2 class="section-title">События для ставок</h2>
+      <p class="section-sub">Особые прогнозы на сегодняшнюю гонку — дождь увеличивает шансы на выезд Safety Car</p>
+
+      <div class="event-card" role="region" aria-label="Событие: будет ли Safety Car">
+        <img src="https://images.unsplash.com/photo-1494216928456-ae75fd966279?q=80&w=2000&auto=format&fit=crop" alt="Мокрая трасса — вероятность сейфти-кара" />
+        <div class="event-body">
+          <h4>Будет ли Safety Car?</h4>
+          <p style="margin:6px 0 0;color:var(--muted)">В дождевых условиях и при инцидентах вероятность выезда автомобиля безопасности существенно возрастает. Выберите прогноз и подтвердите ставкой — подтверждение откроет доступ к трансляции.</p>
+          <div class="event-actions" style="margin-top:12px;">
+            <label class="radio"><input type="radio" name="safetycar" value="yes"> Да</label>
+            <label class="radio"><input type="radio" name="safetycar" value="no"> Нет</label>
+            <button class="btn btn-primary" id="placeBet">Зафиксировать ставку</button>
+          </div>
+          <p class="hint" id="betHint">Ставка ещё не подтверждена.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTS -->
+    <section id="experts" class="experts wrap" aria-label="Экспертные прогнозы">
+      <h2 class="section-title">Экспертное мнение</h2>
+      <p class="section-sub">Свежие комментарии от специалистов прямо перед стартом</p>
+
+      <div class="expert-list" id="expertList">
+        <article class="expert" aria-labelledby="exp1Name">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Эксперт Мария Воронова" />
+          <div>
+            <h4 id="exp1Name">Мария Воронова</h4>
+            <div class="pos">Автоспортивный аналитик</div>
+            <blockquote>«Зандвоорт — трасса, где скорость и контроль шины важнее всего. При дожде команды, которые быстрее адаптируют давление и стратегию, будут получать преимущество. Сейфти-кар в таких условиях — частая история; именно рестарты после него решают исход гонки.»</blockquote>
+          </div>
+        </article>
+
+        <article class="expert" aria-labelledby="exp2Name">
+          <img src="https://images.unsplash.com/photo-1545996124-1b4b1d9f5d6c?q=80&w=800&auto=format&fit=crop" alt="Эксперт Олег Смирнов" />
+          <div>
+            <h4 id="exp2Name">Олег Смирнов</h4>
+            <div class="pos">Бывший гонщик и тренер</div>
+            <blockquote>«Первый сегмент гонки и рестарты — самые критичные моменты. Молодые пилоты могут допустить ошибку под давлением. Команды, грамотно управляющие визитами в боксы и выбирающие подходящую тактику по шинам, будут в выигрыше.»</blockquote>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer aria-label="Подвал сайта">
+    <div class="wrap footer-inner">
+      <div>
+        <strong>F1 Netherlands 2025</strong>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Официальный лендинг: прогнозы, ставки и прямая трансляция (доступ через поддержку).</div>
+      </div>
+      <div style="text-align:right">
+        <!-- Only Telegram as requested -->
+        <a class="tg" href="https://t.me/+fytZa5svbPgyMzJi" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram">Telegram</a>
+        <div style="color:var(--muted);font-size:13px;margin-top:8px">© 2025</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Live button -->
+  <div class="live-btn">
+    <button class="btn btn-primary" id="openLive" title="Открыть трансляцию">Прямая трансляция</button>
+  </div>
+
+  <!-- Modal for Live -->
+  <div class="modal" id="liveModal" role="dialog" aria-modal="true" aria-labelledby="liveTitle">
+    <div class="modal-card" role="document">
+      <div class="modal-head">
+        <h3 id="liveTitle" style="margin:0;font-family:Orbitron, sans-serif">Прямая трансляция</h3>
+        <button class="btn" id="closeLive" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="teaser">
+          <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2000&auto=format&fit=crop" alt="Превью трансляции — стоп-кадр" />
+          <div class="play-overlay">
+            <div class="play-circle" id="playBtn" title="Просмотр трансляции" role="button" aria-pressed="false">
+              <i style="font-size:26px;color:white">►</i>
+            </div>
+          </div>
+        </div>
+        <div class="gate" id="gateMsg" role="status" aria-live="polite">
+          Доступ закрыт. Чтобы получить доступ — поддержите любого пилота или подтвердите ставку в разделе «События».
+        </div>
+        <div class="gate" id="unlockedMsg" style="display:none">
+          <strong>Доступ открыт!</strong> Нажмите кнопку запуска ещё раз, чтобы перейти к трансляции.
+        </div>
+      </div>
     </div>
   </div>
+
   <script>
-    document.querySelectorAll('.ripple-container').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const span = document.createElement('span'); span.className = 'ripple'; btn.appendChild(span);
-        const d = Math.max(btn.clientWidth, btn.clientHeight);
-        span.style.width = span.style.height = d + 'px';
-        const rect = btn.getBoundingClientRect();
-        span.style.left = e.clientX - rect.left - d/2 + 'px';
-        span.style.top = e.clientY - rect.top - d/2 + 'px';
-        setTimeout(() => span.remove(), 600);
+    /* ========== Configuration ========== */
+    // Замените на реальную ссылку трансляции, если есть
+    const LIVE_URL = '#replace-with-live-stream-url';
+
+    /* ========== Utilities & State ========== */
+    const qs = (s, ctx=document) => ctx.querySelector(s);
+    const qsa = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
+    const storage = window.localStorage;
+
+    // init support counts from localStorage
+    const drivers = ['norris','leclerc','verstappen'];
+    drivers.forEach(id => {
+      const cnt = parseInt(storage.getItem('support_'+id) || '0', 10);
+      const el = qs('[data-count="'+id+'"]') || qs('[data-count="'+id+'"]') ; // fallback
+      const counter = qsa('[data-count="'+id+'"]')[0] || qsa('[data-count="'+id+'"]')[0];
+      // we used different attr in markup: data-count="norris" etc - select accordingly
+      const elStrong = document.querySelector('[data-count="'+id+'"]') || document.querySelector('[data-count="'+id+'"]');
+      if(elStrong) elStrong.textContent = cnt;
+      // Also try strong in support-count text
+      const strongs = document.querySelectorAll('strong');
+      strongs.forEach(s => {
+        if(s.parentElement && s.parentElement.hasAttribute('data-count') && s.parentElement.getAttribute('data-count') === id) s.textContent = cnt;
       });
+      // simpler: try to find any element with text node "data-count"
+      const any = document.querySelectorAll('[data-count]');
+      any.forEach(node => { if(node.getAttribute('data-count') === id) node.textContent = cnt; })
     });
+
+    /* ========== Header mobile menu ========== */
+    (function(){
+      const burger = document.getElementById('burger');
+      const nav = document.querySelector('nav');
+      if(!burger || !nav) return;
+      burger.addEventListener('click', () => {
+        const visible = getComputedStyle(nav).display !== 'none';
+        nav.style.display = visible ? 'none' : 'flex';
+        if(!visible) {
+          nav.style.flexDirection = 'column';
+          nav.style.position = 'absolute';
+          nav.style.right = '12px';
+          nav.style.top = '60px';
+          nav.style.background = 'linear-gradient(180deg, rgba(3,6,12,0.9), rgba(3,6,12,0.95))';
+          nav.style.padding = '10px';
+          nav.style.borderRadius = '10px';
+          nav.style.minWidth = '160px';
+        } else {
+          nav.style.display = '';
+          nav.style.position = '';
+          nav.style.flexDirection = '';
+        }
+        burger.setAttribute('aria-expanded', String(!visible));
+      });
+      // close menu when clicking a link
+      nav.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A' && window.innerWidth < 980) {
+          nav.style.display = 'none';
+          burger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    /* ========== Decorative track/car animation (coordinates approximation) ========== */
+    (function(){
+      // animate path drawing
+      const path = document.getElementById('trackPath');
+      if(path){
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = len;
+        path.style.strokeDashoffset = len;
+        path.getBoundingClientRect(); // reflow
+        path.style.transition = 'stroke-dashoffset 1400ms ease-out';
+        setTimeout(()=>{ path.style.strokeDashoffset = '0'; }, 180);
+      }
+      // car float animation (simple)
+      const car = document.getElementById('decorCar');
+      if(car){
+        car.animate([
+          { transform: 'translateY(0) rotate(-6deg)' },
+          { transform: 'translateY(-8px) rotate(6deg)' },
+          { transform: 'translateY(0) rotate(-6deg)' }
+        ], { duration: 3800, iterations: Infinity, easing: 'ease-in-out' });
+      }
+    })();
+
+    /* ========== Support buttons logic ========== */
+    (function(){
+      const btns = Array.from(document.querySelectorAll('.support-btn'));
+      btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Visual micro animation
+          btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 240 });
+
+          // store support locally
+          const driver = btn.getAttribute('data-driver') || (new URL(btn.href)).searchParams.get('driver') || 'unknown';
+          const key = 'support_'+driver;
+          const prev = parseInt(storage.getItem(key) || '0', 10);
+          storage.setItem(key, String(prev + 1));
+          // also mark that user supported someone (for gating)
+          storage.setItem('supported_any', '1');
+
+          // update UI count (we have element <strong data-count="driver">0</strong>)
+          const counter = document.querySelector('[data-count="'+driver+'"]');
+          if(counter) counter.textContent = prev + 1;
+          // feedback
+          showToast('Поддержка учтена ✔');
+          // let the anchor open external link in new tab (already has target="_blank")
+        });
+      });
+    })();
+
+    /* ========== Betting (event) logic ========== */
+    (function(){
+      const placeBetBtn = document.getElementById('placeBet');
+      const betHint = document.getElementById('betHint');
+      if(!placeBetBtn) return;
+      placeBetBtn.addEventListener('click', () => {
+        const sel = document.querySelector('input[name="safetycar"]:checked');
+        if(!sel){ showToast('Выберите вариант: Да или Нет'); return; }
+        storage.setItem('bet_safetycar', sel.value);
+        storage.setItem('supported_any', '1'); // тоже открывает доступ
+        betHint.textContent = 'Ставка сохранена: ' + (sel.value === 'yes' ? 'ожидается выезд Safety Car' : 'без Safety Car');
+        showToast('Ставка подтверждена ✔');
+      });
+    })();
+
+    /* ========== Live modal gating ========== */
+    (function(){
+      const openLive = document.getElementById('openLive');
+      const modal = document.getElementById('liveModal');
+      const closeLive = document.getElementById('closeLive');
+      const playBtn = document.getElementById('playBtn');
+      const gateMsg = document.getElementById('gateMsg');
+      const unlockedMsg = document.getElementById('unlockedMsg');
+
+      function isUnlocked(){
+        return storage.getItem('supported_any') === '1' || !!storage.getItem('bet_safetycar');
+      }
+      function updateGate(){
+        if(isUnlocked()){
+          gateMsg.style.display = 'none';
+          unlockedMsg.style.display = 'block';
+        } else {
+          gateMsg.style.display = 'block';
+          unlockedMsg.style.display = 'none';
+        }
+      }
+
+      openLive.addEventListener('click', () => {
+        updateGate();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+      closeLive.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      modal.addEventListener('click', (e) => {
+        if(e.target === modal){ modal.classList.remove('active'); document.body.style.overflow = ''; }
+      });
+
+      playBtn.addEventListener('click', () => {
+        if(isUnlocked()){
+          // redirect to the real live stream (replace LIVE_URL with real link)
+          if(LIVE_URL && LIVE_URL !== '#replace-with-live-stream-url'){
+            window.open(LIVE_URL, '_blank', 'noopener');
+          } else {
+            showToast('Трансляция: ссылка не указана (замените LIVE_URL в коде).');
+          }
+        } else {
+          showToast('Поддержите любого пилота или подтвердите ставку, чтобы открыть доступ.');
+        }
+      });
+
+      // initial
+      updateGate();
+    })();
+
+    /* ========== Small helper: toast ========== */
+    function showToast(txt, duration=2200){
+      const n = document.createElement('div');
+      n.textContent = txt;
+      n.setAttribute('role','status');
+      Object.assign(n.style, {
+        position:'fixed',left:'50%',transform:'translateX(-50%)',bottom:'20px',zIndex:9999,
+        padding:'10px 14px',borderRadius:'10px',background:'linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.85))',
+        color:'#fff',fontWeight:700,border:'1px solid rgba(255,255,255,0.06)',boxShadow:'0 8px 30px rgba(0,0,0,0.6)'
+      });
+      document.body.appendChild(n);
+      setTimeout(()=>{ n.style.transition = 'opacity .3s'; n.style.opacity = '0'; setTimeout(()=>n.remove(),300); }, duration);
+    }
+
+    /* ========== Accessibility: allow keyboard open/close modal ========== */
+    (function(){
+      document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('liveModal');
+        if(e.key === 'Escape' && modal && modal.classList.contains('active')) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
+
